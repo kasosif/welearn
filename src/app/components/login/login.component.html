@@ -1,0 +1,48 @@
+<div class="row login-bg">
+  <div class="col s12">
+    <div class="container">
+      <div id="login-page" class="row">
+        <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+          <form class="login-form" [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="input-field col s12">
+                <h5 class="ml-4">Connexion</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="alert alert-danger" *ngIf="errorMessage">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{errorMessage}}
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">person_outline</i>
+                <input id="username" type="text" formControlName="username" required>
+                <label for="username" class="center-align">Email/CIN</label>
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">lock_outline</i>
+                <input type="password" id="password" formControlName="password" required/>
+                <label for="password">Mot de Passe</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <button type="submit"
+                        [disabled]="LoginForm.invalid"
+                        class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
+                  Se Connecter
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
