@@ -19,13 +19,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "./src/favicon.ico",
+              "./src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/vendors.min.js",
+              "src/assets/js/plugins.js",
+              "src/assets/js/custom/custom-script.js",
+              "src/assets/js/scripts/customizer.js"
+            ]
           },
           "configurations": {
             "production": {
