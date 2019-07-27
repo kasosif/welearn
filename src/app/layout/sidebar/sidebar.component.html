@@ -1,0 +1,105 @@
+<app-page-loader *ngIf="loading"></app-page-loader>
+<div id="left-sidebar" class="sidebar" *ngIf="sidebarVisible" style="overflow-y:scroll;">
+    <div class="sidebar-scroll">
+        <div class="user-account">
+            <a [routerLink]="['/app/profile']"><img [src]="getImage(me)" class="rounded-circle user-photo" alt="User Profile Picture"></a>
+            <div class="dropdown" ngbDropdown>
+                <span>Bienvenue, <strong>{{getRole(me)}}</strong></span>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" ngbDropdownToggle>
+                    <strong>{{me?.prenom}} {{me?.nom}}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
+                    <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power"></i>Deconnexion</a></li>
+                </ul>
+            </div>
+            <hr>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link" [ngClass]="{'active':navTab == 'menu'}" (click)="changeNavTab('menu')">Menu</a></li>
+            <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active':navTab == 'setting'}" (click)="changeNavTab('setting')">
+                <i class="icon-settings"></i>
+            </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content p-l-0 p-r-0">
+            <div class="tab-pane" id="menu" [ngClass]="{'active':navTab == 'menu' || !navTab}">
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/app/index']"><i class="icon-home"></i>
+                                <span>Accueil</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'calendrier'}">
+                            <a style="cursor: pointer" class="has-arrow" (click)="activeInactiveMenu('calendrier')"><i class="icon-calendar"></i> <span>Examens</span></a>
+                            <ul *ngIf="currentActiveMenu == 'calendrier'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/app/calendrier/app-calendar']">Calendrier</a></li>
+                            </ul>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/app/emploi']"><i class="icon-grid"></i>
+                                <span>Emploi de Semaine</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/app/notes']"><i class="icon-note"></i>
+                                <span>Notes</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/app/abscences']"><i class="icon-clock"></i>
+                                <span>Abscences</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="getRole(me) == 'Etudiant' ">
+                            <a [routerLink]="['/app/demandes']"><i class="icon-doc"></i>
+                                <span>Demandes</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <a [routerLink]="['/app/formations']"><i class="fa fa-play"></i>
+                                <span>Formations</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="tab-pane p-l-15 p-r-15" id="setting" [ngClass]="{'active':navTab == 'setting'}">
+                <hr>
+                <h6>Choisir Theme</h6>
+                <ul class="choose-skin list-unstyled">
+                    <li data-theme="purple" [ngClass]="{'active':themeClass == 'theme-purple'}" (click)="changeTheme('theme-purple')">
+                        <div class="purple"></div>
+                        <span>Mauve</span>
+                    </li>
+                    <li data-theme="blue" [ngClass]="{'active':themeClass == 'theme-blue'}" (click)="changeTheme('theme-blue')">
+                        <div class="blue"></div>
+                        <span>Bleu</span>
+                    </li>
+                    <li data-theme="cyan" [ngClass]="{'active':themeClass == 'theme-cyan'}" (click)="changeTheme('theme-cyan')">
+                        <div class="cyan"></div>
+                        <span>Cyan</span>
+                    </li>
+                    <li data-theme="green" [ngClass]="{'active':themeClass == 'theme-green'}" (click)="changeTheme('theme-green')">
+                        <div class="green"></div>
+                        <span>Vert</span>
+                    </li>
+                    <li data-theme="orange" [ngClass]="{'active':themeClass == 'theme-orange'}" (click)="changeTheme('theme-orange')">
+                        <div class="orange"></div>
+                        <span>Orange</span>
+                    </li>
+                    <li data-theme="blush" [ngClass]="{'active':themeClass == 'theme-blush'}" (click)="changeTheme('theme-blush')">
+                        <div class="blush"></div>
+                        <span>Rose</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container-fluid" *ngIf="getRole() === 'ROLE_ETUDIANT' ">
+
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12">
+        <h2>
+          <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth" (click)="toggleFullWidth()">
+            <i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
+            <i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
+          </a>
+          Formations
+        </h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/app']"><i class="icon-home"></i></a></li>
+          <li class="breadcrumb-item">Formations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row clearfix" *ngIf="!loading && formations?.length == 0" >
+    <div class="card">
+      <div class="body">
+        <div class="alert alert-primary">
+          Vous n'avez aucune Formation
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix" *ngIf="!loading && formations.length > 0">
+    <div class="col-md-6 col-lg-4" *ngFor="let formation of formations">
+      <div class="card">
+        <div class="body">
+          <img  *ngIf="formation.image" [src]="'http://gestionscolarite.com/images/formations/' + formation.image" alt="" class="img-fluid rounded m-b-20">
+          <h6 class="mb-4">{{formation.titre}}</h6>
+          <ul class="list-unstyled">
+            <li>
+              <label class="m-b-5 font-weight-500">{{formation.partieformations.length}} Parties </label>
+            </li>
+            <li>
+              <label class="m-b-5 font-weight-500">Progression: {{calculProgress(formation)}} %</label>
+            </li>
+            <li>
+              <label class="m-b-5 font-weight-500">Professeur: </label>
+              <h6>{{formation.user?.gendre == 'male' ? 'Mr' : 'Mme' }} {{formation.user?.prenom}} {{formation.user?.nom}}</h6>
+            </li>
+          </ul>
+          <a [routerLink]="['/app/single-formation/' + formation.slug]" class="btn btn-block  btn-success btn-simple" role="button">Visualiser</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" *ngIf="getRole() === 'ROLE_PROFESSEUR' ">
+
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-5 col-md-8 col-sm-12">
+        <h2>
+          <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth" (click)="toggleFullWidth()">
+            <i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
+            <i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
+          </a>
+          Formations
+        </h2>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a [routerLink]="['/app']"><i class="icon-home"></i></a></li>
+          <li class="breadcrumb-item">Formations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!loading && getRole() == 'ROLE_PROFESSEUR'" >
+    <div class="card">
+      <div class="body">
+        <a class="btn btn-primary btn-block" [routerLink]="['/app/addformation']">
+          Ajouter une Formation
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix" *ngIf="!loading && formations?.length == 0" >
+    <div class="card">
+      <div class="body">
+        <div class="alert alert-primary">
+          Vous n'avez aucune Formation
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix" *ngIf="!loading && formations.length > 0">
+    <div class="card mb-3" *ngFor="let formation of formations">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img  *ngIf="formation.image" [src]="'http://gestionscolarite.com/images/formations/' + formation.image" alt="" class="card-img">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <small>titre: </small><br>
+            <h5 class="card-title">{{formation.titre}}</h5>
+            <small>description: </small><br>
+            <p class="card-text">{{formation.description}}</p>
+            <small>niveau: </small><br>
+            <h5 class="card-title">{{formation.niveau.specialite.nom}} {{formation.niveau.nom}}</h5>
+            <p class="card-text"><small class="text-muted">ajouté {{ago(formation.created_at)}}</small></p>
+            <a [routerLink]="['/app/formations/' + formation.slug]" class="btn btn-primary">Plus de Détails</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
