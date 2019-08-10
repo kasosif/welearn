@@ -130,7 +130,6 @@ export class AppCalendarComponent implements OnDestroy , OnInit {
 				this.initDevoirForm();
 			},
 			(err) => {
-				console.log(err);
 			}
 		);
 	}
@@ -141,7 +140,6 @@ export class AppCalendarComponent implements OnDestroy , OnInit {
 				this.displayEvent = model;
 			},
 			(err) => {
-				console.log(err);
 			}
 		);
 	}
@@ -182,7 +180,6 @@ export class AppCalendarComponent implements OnDestroy , OnInit {
 		const date = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
 		const time = d.getHours() + ':' + d.getMinutes() ;
 		const dateTime = date + '\T' + time;
-		console.log(dateTime);
 		this.devoirForm = this.formBuilder.group(
 			{
 				date: [dateTime, [Validators.required]],
@@ -217,7 +214,6 @@ export class AppCalendarComponent implements OnDestroy , OnInit {
 				this.modalService.dismissAll();
 			},
 			(err) => {
-				console.log(err);
 			}
 		);
 	}

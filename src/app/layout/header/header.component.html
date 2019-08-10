@@ -51,6 +51,7 @@
                                             <p class="text">{{notif.data.texte}}
                                                 <br>
                                                 {{ notif.data.date ? notif.data.date : notif.data.devoir }}
+                                                {{ notif.data.seance ? 'Seance: ' + notif.data.seance : '' }}
                                             </p>
                                             <span class="timestamp">{{ago(notif.created_at)}}</span>
                                         </div>

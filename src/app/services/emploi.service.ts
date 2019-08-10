@@ -5,7 +5,7 @@ import {Case} from '../models/case';
 import {Subject} from 'rxjs';
 import {Seance} from '../models/seance';
 import {Jour} from '../models/jour';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +14,8 @@ export class EmploiService {
   jours: Jour[] = [];
   seances: Seance[] = [];
   casesSubject = new Subject<Case[]>();
-  constructor(private httpClient: HttpClient, private router: Router) { }
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/schedule';
+  constructor(private httpClient: HttpClient, private router: Router, private global: Globals) { }
+  url = this.global.Server + 'schedule';
   emitCases() {
     this.casesSubject.next(this.cases.slice());
   }

@@ -105,7 +105,6 @@ export class NoteComponent implements OnInit {
   details(devoir) {
     this.devoir = devoir;
     this.detailsopened = true;
-    console.log('details clicked');
   }
 
   getDevoirs() {

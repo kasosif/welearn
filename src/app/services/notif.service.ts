@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Notif} from '../models/notif';
 import {Observable} from 'rxjs';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
 export class NotifService {
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/notifs';
-  constructor(private httpClient: HttpClient) { }
+  url = this.global.Server + 'notifs';
+  constructor(private httpClient: HttpClient, private global: Globals) { }
   getNotifs(): Observable<Notif[]> {
     const headers = new HttpHeaders()
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));

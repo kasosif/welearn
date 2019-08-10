@@ -18,7 +18,7 @@ export class SingleFormationComponent implements OnInit {
     loading = true;
     playlist: Array<IMedia> = [];
     formation: Formation;
-    currentIndex;
+    currentIndex = 0;
     currentItem: IMedia;
     public sidebarVisible = true;
     constructor(private sidebarService: SidebarService,
@@ -35,25 +35,32 @@ export class SingleFormationComponent implements OnInit {
                 this.formation = res['formation'];
                 this.formation.partieformations.forEach(
                     (el: Partieformation) => {
-                        this.playlist.push({
-                            id: el.id,
-                            title: el.titre,
-                            src: 'http://gestionscolarite.com/api/' + el.uuid + '/view',
-                            type: 'video/mp4',
-                            progress: el.progressionetudiants.find(
-                                (elemen: ProgressionEtudiant) => {
-                                    return elemen.partie_formation_id === el.id;
-                                }
-                            ) ? (el.progressionetudiants.find(
-                                (elemen: ProgressionEtudiant) => {
-                                    return elemen.partie_formation_id === el.id;
-                                }
-                            ).progress / el.progressionetudiants.find(
-                                (elemen: ProgressionEtudiant) => {
-                                    return elemen.partie_formation_id === el.id;
-                                }
-                            ).time) * 100 : 0
-                        });
+                        const prog = el.progressionetudiants.find(
+                            (elemen: ProgressionEtudiant) => {
+                                return elemen.partie_formation_id === el.id;
+                            }
+                        ) ? el.progressionetudiants.find(
+                            (elemen: ProgressionEtudiant) => {
+                                return elemen.partie_formation_id === el.id;
+                            }
+                        ).progress : 0;
+                        const time =  el.progressionetudiants.find(
+                            (elemen: ProgressionEtudiant) => {
+                                return elemen.partie_formation_id === el.id;
+                            }
+                        ) ? el.progressionetudiants.find(
+                            (elemen: ProgressionEtudiant) => {
+                                return elemen.partie_formation_id === el.id;
+                            }
+                            ).time : 1;
+                            this.playlist.push({
+                                id: el.id,
+                                title: el.titre,
+                                src: 'http://gestionscolarite.com/api/' + el.uuid + '/view?token=' + localStorage.getItem('token'),
+                                type: 'video/mp4',
+                                progress: prog,
+                                time: time
+                            });
                     }
                 );
                 this.currentIndex = 0;
@@ -85,25 +92,12 @@ export class SingleFormationComponent implements OnInit {
         );
         this.api.getDefaultMedia().subscriptions.pause.subscribe(
             () => {
+                console.log(this.api.getDefaultMedia().currentTime);
+                console.log(this.api.getDefaultMedia().duration);
                 this.formationService.progressEtudiant(this.currentItem.id,
-                    this.api.getDefaultMedia().currentTime, this.api.getDefaultMedia().duration).subscribe(
-                    (res) => {
-                        console.log(res['message']);
-                    }
-                );
+                    this.api.getDefaultMedia().currentTime, this.api.getDefaultMedia().duration).subscribe();
             }
         );
-        this.api.getDefaultMedia().subscriptions.ended.subscribe(
-            this.nextVideo.bind(this)
-        );
-    }
-    nextVideo() {
-        this.currentIndex++;
-        if (this.currentIndex === this.playlist.length) {
-            this.currentIndex = 0;
-        }
-
-        this.currentItem = this.playlist[ this.currentIndex ];
     }
     ago(value: string): string {
         const d = new Date(value);
@@ -140,6 +134,12 @@ export class SingleFormationComponent implements OnInit {
         } else { // (days > 545)
             return 'il y a ' + years + ' ans';
         }
+    }
+    onRightClick() {
+        return false;
+    }
+    getProgessPourcentage(item: IMedia) {
+        return (item.progress * 100 / item.time);
     }
 
 }

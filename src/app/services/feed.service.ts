@@ -3,15 +3,15 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {Feed} from '../models/feed';
-
+import { Globals } from '../Globals';
 @Injectable({
     providedIn: 'root'
 })
 export class FeedService {
     feeds: Feed[] = [];
     feedsSubject = new Subject<Feed[]>();
-    constructor(private httpClient: HttpClient, private router: Router) { }
-    url = 'http://localhost/laravel/gestion-scolarite/public/api/feeds';
+    constructor(private httpClient: HttpClient, private router: Router, private global: Globals) { }
+    url = this.global.Server + 'feeds';
     emitFeeds() {
         this.feedsSubject.next(this.feeds.slice());
     }

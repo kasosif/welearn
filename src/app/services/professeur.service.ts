@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
 export class ProfesseurService {
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/professeurs';
+  url = this.global.Server + 'professeurs';
   constructor(private httpClient: HttpClient,
-              private router: Router) { }
+              private router: Router, private global: Globals) { }
 
   getProfesseursFromServer() {
     const headers = new HttpHeaders()

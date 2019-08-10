@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
 export class NiveauService {
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/niveaux';
+  url = this.global.Server + 'niveaux';
   constructor(private httpClient: HttpClient,
-              private router: Router) { }
+              private router: Router, private global: Globals) { }
 
   getNiveaux() {
     const headers = new HttpHeaders()

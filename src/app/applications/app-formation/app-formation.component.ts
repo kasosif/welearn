@@ -51,7 +51,7 @@ export class AppFormationComponent implements OnInit {
           }
         }
     );
-    return Math.round((progress / formation.duration) * 100);
+    return Math.round((progress * 100 ) / formation.duration);
   }
 
   getRole() {

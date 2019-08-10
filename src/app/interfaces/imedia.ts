@@ -4,4 +4,5 @@ export interface IMedia {
     src: string;
     type: string;
     progress?: number;
+    time?: number;
 }

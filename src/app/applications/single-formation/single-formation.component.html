@@ -42,7 +42,7 @@
           <h2>Lecteur Welearn</h2>
         </div>
         <div class="body">
-          <vg-player (onPlayerReady)="onPlayerReady($event)">
+          <vg-player (onPlayerReady)="onPlayerReady($event)" (contextmenu)="onRightClick($event)">
             <vg-controls>
               <vg-play-pause></vg-play-pause>
               <vg-playback-button></vg-playback-button>
@@ -94,7 +94,7 @@
                 </span>
               </p>
               <div class="progress progress-xs progress-transparent custom-color-blue">
-                <div class="progress-bar" [ngStyle]="{'width.%': item.progress}"></div>
+                <div class="progress-bar" [ngStyle]="{'width.%': getProgessPourcentage(item)}"></div>
               </div>
             </li>
           </ol>

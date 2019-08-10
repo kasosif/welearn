@@ -79,7 +79,6 @@ export class AjoutFormationComponent implements OnInit {
 
     getformArray() { return <FormArray>this.formationForm.get('parties'); }
     Genererpartiesform() {
-        console.log('gen called');
         this.srcs = [];
         this.nbr_parties = parseInt(this.formationForm.get('nbr_parties').value, 10);
         const parties = this.formationForm.controls.parties as FormArray;
@@ -94,7 +93,6 @@ export class AjoutFormationComponent implements OnInit {
 
     onFormationSubmit(value) {
         value.slug = this.slug;
-        console.log(value);
         this.formationService.add(value).pipe(
             uploadProgress(progress => (this.progress = progress)),
             toResponseBody()

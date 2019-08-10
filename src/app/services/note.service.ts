@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/notes';
+  url = this.global.Server + 'notes';
   constructor(private httpClient: HttpClient,
-              private router: Router) { }
+              private router: Router, private global: Globals) { }
   getNotes() {
     const headers = new HttpHeaders()
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));

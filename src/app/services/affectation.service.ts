@@ -4,7 +4,7 @@ import {Devoir} from '../models/devoir';
 import {Affectation} from '../models/affectation';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
-
+import { Globals } from '../Globals';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +13,9 @@ export class AffectationService {
   affectations: Affectation[] = [];
   affectationsSubject = new Subject<Affectation[]>();
   constructor(private httpClient: HttpClient,
-              private router: Router) { }
+              private router: Router, private global: Globals) { }
 
-  url = 'http://localhost/laravel/gestion-scolarite/public/api/affectations';
+  url = this.global.Server + 'affectations';
 
 
   emitAffectations() {

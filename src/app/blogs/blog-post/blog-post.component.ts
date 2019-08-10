@@ -164,7 +164,6 @@ export class BlogPostComponent implements OnInit {
 				feed.classes = null;
 			}
 		}
-		console.log(feed);
 		this.success = false;
 		this.feedService.addFeed(feed).pipe(
 			uploadProgress(progress => (this.progress = progress)),

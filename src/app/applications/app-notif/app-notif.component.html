@@ -35,7 +35,7 @@
               </div>
             </td>
             <td>
-              <h6 class="margin-0">{{notification.data.texte}} {{notification.data.devoir ? notification.data.devoir : notification.data.date}}</h6>
+              <h6 class="margin-0">{{notification.data.texte}} {{notification.data.devoir ? notification.data.devoir : notification.data.date}} {{notification.data.seance ? 'Seance: ' + notification.data.seance : ''}}</h6>
             </td>
             <td>
               <h6 class="m-b-0">{{ago(notification.created_at)}}</h6>

@@ -205,7 +205,6 @@ export class BlogListComponent implements OnInit, OnDestroy {
 		feed.image = this.feedForm.get('image').value;
 		feed.users = [];
 		feed.classes = [];
-		console.log(feed);
 		this.success = false;
 		this.feedService.addFeed(feed).pipe(
 			uploadProgress(progress => (this.progress = progress)),

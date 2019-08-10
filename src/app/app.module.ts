@@ -10,7 +10,7 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgxGalleryModule } from 'ngx-gallery';
-
+import { Globals } from './Globals';
 import * as $ from 'jquery';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuardService} from './services/auth-guard.service';
@@ -32,7 +32,8 @@ import {AuthGuardService} from './services/auth-guard.service';
         NgxGalleryModule,
     ],
     providers: [
-        AuthGuardService
+        AuthGuardService,
+        Globals
     ],
     bootstrap: [AppComponent]
 })
