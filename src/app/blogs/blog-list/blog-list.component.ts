@@ -136,7 +136,6 @@ export class BlogListComponent implements OnInit, OnDestroy {
 	ago(value: string): string {
 		const d = new Date(value);
 		const now = new Date();
-		now.setHours(now.getHours() - 1 );
 		const seconds = Math.round(Math.abs((now.getTime() - d.getTime()) / 1000));
 		const minutes = Math.round(Math.abs(seconds / 60));
 		const hours = Math.round(Math.abs(minutes / 60));
@@ -188,6 +187,9 @@ export class BlogListComponent implements OnInit, OnDestroy {
 	getRole(): string {
 		return localStorage.getItem('role');
 	}
+	getcin(): string {
+		return localStorage.getItem('cin');
+	}
 
 	initFeedForm() {
 		this.feedForm = this.formBuilder.group(
@@ -221,7 +223,4 @@ export class BlogListComponent implements OnInit, OnDestroy {
 		const feedTitle = this.feedForm.get('titre').value.toLowerCase();
 		this.slug = feedTitle.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').toLowerCase();
 	}
-
-
-
 }

@@ -17,6 +17,7 @@ import {BlogPostComponent} from '../blogs/blog-post/blog-post.component';
 import {AppProfileComponent} from '../applications/app-profile/app-profile.component';
 import {DetailFormationComponent} from '../applications/detail-formation/detail-formation.component';
 import {AjoutFormationComponent} from '../blogs/ajout-formation/ajout-formation.component';
+import {EmploisComponent} from '../pages/emplois/emplois.component';
 
 const routes: Routes = [
     {
@@ -65,7 +66,11 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'emploi', component: PageBlankComponent, data: { title: ':: We Learn :: App :: Emploi ::'}
+                path: 'emplois',
+                children: [
+                    {path: '', component: EmploisComponent, data: { title: ':: We Learn :: App :: Emploi à venir ::'} },
+                    {path: 'current', component: PageBlankComponent, data: { title: ':: We Learn :: App :: Emploi de la Semaine ::'} }
+                ]
             },
             {
                 path: 'demandes', component: AppDemandeComponent, data: { title: ':: We Learn :: App :: Demandes ::'}

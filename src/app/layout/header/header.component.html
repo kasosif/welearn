@@ -42,7 +42,7 @@
                                 </span>
                             </li>
                             <li *ngFor="let notif of (notifs$ | async)?.notifs ">
-                                <a href="javascript:void(0);">
+                                <a [routerLink]="[notif.data.lien]">
                                     <div class="media">
                                         <div class="media-left">
                                             <i [ngClass]="notif.data.icone"></i>

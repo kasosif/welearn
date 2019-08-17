@@ -7,61 +7,63 @@ import {Formation} from '../../models/formation';
 import {FormationService} from '../../services/formation.service';
 import {Partieformation} from '../../models/partieformation';
 import {ProgressionEtudiant} from '../../models/progressionetudiant';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-app-formation',
-  templateUrl: './app-formation.component.html',
-  styleUrls: ['./app-formation.component.css']
+    selector: 'app-app-formation',
+    templateUrl: './app-formation.component.html',
+    styleUrls: ['./app-formation.component.css']
 })
 export class AppFormationComponent implements OnInit {
-  loading = true;
-  formations: Formation[] = [];
-  public sidebarVisible = true;
-  constructor(private sidebarService: SidebarService,
-              private cdr: ChangeDetectorRef,
-              private router: Router,
-              private formationService: FormationService) {
-  }
+    loading = true;
+    selectionne: Formation;
+    formations: Formation[] = [];
+    public sidebarVisible = true;
+    constructor(private sidebarService: SidebarService,
+                private modalService: NgbModal,
+                private cdr: ChangeDetectorRef,
+                private router: Router,
+                private formationService: FormationService) {
+    }
 
 
-  ngOnInit() {
-    this.formationService.getFormations().subscribe(
-        (res) => {
-          this.formations = res['formations'];
-          this.loading = false;
-        }
-    );
-  }
-  toggleFullWidth() {
-    this.sidebarService.toggle();
-    this.sidebarVisible = this.sidebarService.getStatus();
-    this.cdr.detectChanges();
-  }
+    ngOnInit() {
+        this.formationService.getFormations().subscribe(
+            (res) => {
+                this.formations = res['formations'];
+                this.loading = false;
+            }
+        );
+    }
+    toggleFullWidth() {
+        this.sidebarService.toggle();
+        this.sidebarVisible = this.sidebarService.getStatus();
+        this.cdr.detectChanges();
+    }
 
-  calculProgress(formation: Formation) {
-    let progress = 0;
-    formation.partieformations.forEach(
-        (el: Partieformation) => {
-          if (el.progressionetudiants.length > 0) {
-            progress += el.progressionetudiants.find(
-                (elemen: ProgressionEtudiant) => {
-                  return elemen.partie_formation_id === el.id;
+    calculProgress(formation: Formation) {
+        let progress = 0;
+        formation.partieformations.forEach(
+            (el: Partieformation) => {
+                if (el.progressionetudiants.length > 0) {
+                    progress += el.progressionetudiants.find(
+                        (elemen: ProgressionEtudiant) => {
+                            return elemen.partie_formation_id === el.id;
+                        }
+                    ).progress;
                 }
-            ).progress;
-          }
-        }
-    );
-    return Math.round((progress * 100 ) / formation.duration);
-  }
+            }
+        );
+        return Math.round((progress * 100 ) / formation.duration);
+    }
 
-  getRole() {
-      return localStorage.getItem('role');
-  }
+    getRole() {
+        return localStorage.getItem('role');
+    }
 
     ago(value: string): string {
         const d = new Date(value);
         const now = new Date();
-        now.setHours(now.getHours() - 1 );
         const seconds = Math.round(Math.abs((now.getTime() - d.getTime()) / 1000));
         const minutes = Math.round(Math.abs(seconds / 60));
         const hours = Math.round(Math.abs(minutes / 60));
@@ -94,5 +96,22 @@ export class AppFormationComponent implements OnInit {
             return 'il y a ' + years + ' ans';
         }
     }
+
+    openModalSuppression(content, size, formation) {
+        this.selectionne = formation;
+        this.modalService.open(content, { size: size });
+    }
+    deleteformation() {
+        this.formationService.deleteFormation(this.selectionne.slug).subscribe(
+            () => {
+                const index: number = this.formations.indexOf(this.selectionne);
+                if (index !== -1) {
+                    this.formations.splice(index, 1);
+                }
+                this.modalService.dismissAll();
+            }
+        );
+    }
+
 
 }

@@ -15,14 +15,14 @@ export class EmploiService {
   seances: Seance[] = [];
   casesSubject = new Subject<Case[]>();
   constructor(private httpClient: HttpClient, private router: Router, private global: Globals) { }
-  url = this.global.Server + 'schedule';
+  url = this.global.Server;
   emitCases() {
     this.casesSubject.next(this.cases.slice());
   }
   getCasesFromServer() {
     const headers = new HttpHeaders()
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));
-    this.httpClient.get(this.url, {headers})
+    this.httpClient.get(this.url + 'schedule', {headers})
         .subscribe(
             (response) => {
               this.cases = response['cases'];
@@ -36,5 +36,15 @@ export class EmploiService {
                 }
             }
         );
+  }
+  getEmploisFromServer() {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.get(this.url + 'schedules', {headers});
+  }
+  getOneEmploi(classe, debut, fin) {
+      const headers = new HttpHeaders()
+          .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+      return this.httpClient.post(this.url + 'oneschedule', {classe, debut, fin}, {headers});
   }
 }

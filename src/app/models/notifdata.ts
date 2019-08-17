@@ -4,4 +4,5 @@ export class Notifdata {
     seance: string;
     date: string;
     texte: string;
+    lien: string;
 }

@@ -42,7 +42,7 @@ export class DetailFormationComponent implements OnInit {
                 this.playlist.push({
                   id: el.id,
                   title: el.titre,
-                  src: 'http://gestionscolarite.com/api/' + el.uuid + '/view',
+                  src: 'http://gestionscolarite.com/api/' + el.uuid + '/view?token=' + localStorage.getItem('token'),
                   type: 'video/mp4',
                 });
               }
@@ -89,7 +89,6 @@ export class DetailFormationComponent implements OnInit {
   ago(value: string): string {
     const d = new Date(value);
     const now = new Date();
-    now.setHours(now.getHours() - 1 );
     const seconds = Math.round(Math.abs((now.getTime() - d.getTime()) / 1000));
     const minutes = Math.round(Math.abs(seconds / 60));
     const hours = Math.round(Math.abs(minutes / 60));

@@ -9,7 +9,7 @@
                     <strong>{{me?.prenom}} {{me?.nom}}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
-                    <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profile</a></li>
+                    <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profil</a></li>
                     <li class="divider"></li>
                     <li><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power"></i>Deconnexion</a></li>
                 </ul>
@@ -42,10 +42,12 @@
                                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/app/calendrier/app-calendar']">Calendrier</a></li>
                             </ul>
                         </li>
-                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                            <a [routerLink]="['/app/emploi']"><i class="icon-grid"></i>
-                                <span>Emploi de Semaine</span>
-                            </a>
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active': currentActiveMenu =='emplois'}">
+                            <a style="cursor: pointer" class="has-arrow" (click)="activeInactiveMenu('emplois')"><i class="icon-grid"></i> <span>Emplois du temps</span></a>
+                            <ul *ngIf="currentActiveMenu == 'emplois'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/app/emplois/current']">Emploi de Cette Semaine</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/app/emplois']">Emplois à venir</a></li>
+                            </ul>
                         </li>
                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                             <a [routerLink]="['/app/notes']"><i class="icon-note"></i>

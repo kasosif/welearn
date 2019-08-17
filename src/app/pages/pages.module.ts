@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CommonElementsModule } from '../common-elements/common-elements.module';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { EmploisComponent } from './emplois/emplois.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
 		PageProjectsListComponent,
 		PageTestimonialsComponent,
 		PageFaqComponent,
-		PageMaintananceComponent
+		PageMaintananceComponent,
+		EmploisComponent
 	],
 	imports: [
 		CommonModule,

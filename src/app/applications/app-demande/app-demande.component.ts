@@ -3,7 +3,7 @@ import {SidebarService} from '../../services/sidebar.service';
 import {AbscenceService} from '../../services/abscence.service';
 import {DemandeService} from '../../services/demande.service';
 import {Demande} from '../../models/demande';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
 
@@ -14,10 +14,11 @@ import {Router} from '@angular/router';
 })
 export class AppDemandeComponent implements OnInit {
   presbtnloading: boolean;
+  persobtnloading: boolean;
   insbtnloading: boolean;
   incriptionForm: FormGroup;
   presenceForm: FormGroup;
-  btnloading: boolean;
+  personnaliseForm: FormGroup;
   loading = true;
   demandes: Demande[];
   public sidebarVisible = true;
@@ -43,6 +44,7 @@ export class AppDemandeComponent implements OnInit {
     );
     this.initInscriptionForm();
     this.initPresenceForm();
+    this.initPersonnaliseForm();
   }
 
   toggleFullWidth() {
@@ -62,6 +64,13 @@ export class AppDemandeComponent implements OnInit {
     const d =  this.demandes.filter(
         (el: Demande) => {
           return el.type === 'Inscription';
+        });
+    return d[0];
+  }
+  getPersonnalise()  {
+    const d =  this.demandes.filter(
+        (el: Demande) => {
+          return el.type === 'Personnalise';
         });
     return d[0];
   }
@@ -94,11 +103,25 @@ export class AppDemandeComponent implements OnInit {
         }
     );
   }
+  onPersonnaliseSubmit() {
+    this.persobtnloading = true;
+    const d = new Demande('Personnalise');
+    d.description = this.personnaliseForm.get('description').value;
+    this.demandeService.sendDemande(d).subscribe(
+        () => {
+          this.demandeService.getDemandes().subscribe(
+              (res) => {
+                this.demandes = res['demandes'];
+                this.persobtnloading = false;
+              }
+          );
+        }
+    );
+  }
 
   ago(value: string): string {
     const d = new Date(value);
     const now = new Date();
-    now.setHours(now.getHours() - 1 );
     const seconds = Math.round(Math.abs((now.getTime() - d.getTime()) / 1000));
     const minutes = Math.round(Math.abs(seconds / 60));
     const hours = Math.round(Math.abs(minutes / 60));
@@ -136,6 +159,11 @@ export class AppDemandeComponent implements OnInit {
   }
   initPresenceForm() {
     this.presenceForm = this.formBuilder.group({});
+  }
+  initPersonnaliseForm() {
+    this.personnaliseForm = this.formBuilder.group({
+        description: ['', [Validators.required, Validators.minLength(5)]]
+    });
   }
 
 

@@ -48,4 +48,10 @@ export class FormationService {
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.httpClient.put(this.url, {'partie': partieformation, 'time': duration, 'progress': progress }, {headers});
   }
+
+  deleteFormation(slug: string) {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.delete(this.url + '/' + slug, {headers});
+  }
 }

@@ -20,4 +20,16 @@ export class NotifService {
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.httpClient.patch(this.url, [], {headers});
   }
+
+  deleteNotif(id: string) {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.delete(this.url + '/' + id, {headers});
+  }
+
+  deleteAll() {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.delete(this.url, {headers});
+  }
 }

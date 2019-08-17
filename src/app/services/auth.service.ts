@@ -49,12 +49,15 @@ export class AuthService {
                     localStorage.removeItem('token');
                     localStorage.removeItem('date-login');
                     localStorage.removeItem('role');
+                    localStorage.removeItem('cin');
                     this.router.navigate(['authentication', 'page-login']);
                 }
             );
         }
         localStorage.removeItem('token');
         localStorage.removeItem('date-login');
+        localStorage.removeItem('role');
+        localStorage.removeItem('cin');
         this.router.navigate(['authentication', 'page-login']);
     }
     public getToken(): string {

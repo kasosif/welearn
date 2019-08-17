@@ -21,7 +21,7 @@
   <div class="row clearfix" *ngIf="getRole() === 'ROLE_ETUDIANT' ">
     <div class="card">
       <div class="header">
-        <h2>Mes Notes</h2>
+        <h2>Vos Notes</h2>
       </div>
       <div *ngIf="!loading && notes?.length == 0" class="body">
         <div class="alert alert-primary">
@@ -60,7 +60,7 @@
   <div class="row clearfix" *ngIf="getRole() === 'ROLE_PROFESSEUR' && detailsopened === false">
     <div class="card">
       <div class="header">
-        <h2>Mes Examens</h2>
+        <h2>Vos Examens</h2>
       </div>
       <div *ngIf="!loading && devoirs?.length == 0" class="body">
         <div class="alert alert-primary">
