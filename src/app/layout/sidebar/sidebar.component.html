@@ -2,7 +2,7 @@
 <div id="left-sidebar" class="sidebar" *ngIf="sidebarVisible" style="overflow-y:scroll;">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <a [routerLink]="['/app/profile']"><img [src]="getImage(me)" class="rounded-circle user-photo" alt="User Profile Picture"></a>
+            <a [routerLink]="['/app/profile']"><img style="width: 60px;height: 60px;object-fit: cover;" [src]="getImage(me)" class="rounded-circle user-photo" alt="User Profile Picture"></a>
             <div class="dropdown" ngbDropdown>
                 <span>Bienvenue, <strong>{{getRole(me)}}</strong></span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" ngbDropdownToggle>
@@ -10,6 +10,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
                     <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profil</a></li>
+                    <li><a [routerLink]="['/app/changepassword']"><i class="icon-lock"></i>Changer Mot de Passe</a></li>
                     <li class="divider"></li>
                     <li><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power"></i>Deconnexion</a></li>
                 </ul>

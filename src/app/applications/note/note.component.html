@@ -47,8 +47,8 @@
             </td>
             <td>
               <p *ngIf="note.mark < 10"><span class="text-danger">{{note.mark}}</span>/20</p>
-              <p *ngIf="note.mark > 10 && note.mark < 15 "><span class="text-primary">{{note.mark}} </span>/20</p>
-              <p *ngIf="note.mark > 15"><span class="text-success">{{note.mark}}</span>/20</p>
+              <p *ngIf="note.mark >= 10 && note.mark < 15 "><span class="text-primary">{{note.mark}} </span>/20</p>
+              <p *ngIf="note.mark >= 15"><span class="text-success">{{note.mark}}</span>/20</p>
             </td>
           </tr>
           </tbody>
@@ -92,10 +92,10 @@
               <p *ngIf=" calculMoyenne(devoir) < 10 ">
                 <span class="text-danger">{{calculMoyenne(devoir)}}</span>/20
               </p>
-              <p *ngIf=" calculMoyenne(devoir) > 10 && calculMoyenne(devoir) < 15 "><span class="text-primary">
+              <p *ngIf=" calculMoyenne(devoir) >= 10 && calculMoyenne(devoir) < 15 "><span class="text-primary">
                 {{calculMoyenne(devoir)}} </span>/20
               </p>
-              <p *ngIf="calculMoyenne(devoir) > 15">
+              <p *ngIf="calculMoyenne(devoir) >= 15">
                 <span class="text-success">{{calculMoyenne(devoir)}}</span>/20
               </p>
             </td>

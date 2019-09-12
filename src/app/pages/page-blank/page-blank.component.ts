@@ -6,7 +6,7 @@ import {Case} from '../../models/case';
 import {Jour} from '../../models/jour';
 import {Seance} from '../../models/seance';
 import {Subscription} from 'rxjs';
-
+import * as jsPDF from 'jspdf';
 @Component({
 	selector: 'app-page-blank',
 	templateUrl: './page-blank.component.html',
@@ -80,5 +80,21 @@ export class PageBlankComponent implements OnInit {
 	}
 	getRole() {
 		return localStorage.getItem('role');
+	}
+	genererPDF() {
+		this.emploiService.getEmploiPDF(this.cases[0].semaine, this.cases[0].date_debut, this.cases[0].date_fin).subscribe(
+			(response) => {
+				this.downLoadFile(response, 'application/pdf');
+			}
+		);
+	}
+
+	downLoadFile(data: any, type: string) {
+		const blob = new Blob([data], { type: type});
+		const url = window.URL.createObjectURL(blob);
+		const pwa = window.open(url);
+		if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
+			alert( 'Veuillez desactiver le blockeur de Pop Ups ');
+		}
 	}
 }

@@ -2,10 +2,8 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Case} from '../../models/case';
 import {Jour} from '../../models/jour';
 import {Seance} from '../../models/seance';
-import {Subscription} from 'rxjs';
 import {SidebarService} from '../../services/sidebar.service';
 import {EmploiService} from '../../services/emploi.service';
-
 @Component({
   selector: 'app-emplois',
   templateUrl: './emplois.component.html',
@@ -101,6 +99,23 @@ export class EmploisComponent implements OnInit {
           this.singleloading = false;
         }
     );
+  }
+
+  genererPDF() {
+    this.emploiService.getEmploiPDF(this.semaine, this.date_debut, this.date_fin).subscribe(
+        (response) => {
+           this.downLoadFile(response, 'application/pdf');
+        }
+    );
+  }
+
+  downLoadFile(data: any, type: string) {
+    const blob = new Blob([data], { type: type});
+    const url = window.URL.createObjectURL(blob);
+    const pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
+      alert( 'Veuillez desactiver le blockeur de Pop Ups ');
+    }
   }
 
 }

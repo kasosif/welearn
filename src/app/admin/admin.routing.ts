@@ -18,6 +18,7 @@ import {AppProfileComponent} from '../applications/app-profile/app-profile.compo
 import {DetailFormationComponent} from '../applications/detail-formation/detail-formation.component';
 import {AjoutFormationComponent} from '../blogs/ajout-formation/ajout-formation.component';
 import {EmploisComponent} from '../pages/emplois/emplois.component';
+import {ChangePasswordComponent} from '../applications/change-password/change-password.component';
 
 const routes: Routes = [
     {
@@ -57,6 +58,9 @@ const routes: Routes = [
             },
             {
                 path: 'profile', component: PageProfileComponent, data: { title: ':: We Learn :: App :: Profil ::' }
+            },
+            {
+                path: 'changepassword', component: ChangePasswordComponent, data: { title: ':: We Learn :: App :: Changer Mot De Passe ::' }
             },
             {
                 path: 'calendrier',

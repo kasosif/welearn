@@ -8,6 +8,7 @@ import {FormationService} from '../../services/formation.service';
 import {Partieformation} from '../../models/partieformation';
 import {ProgressionEtudiant} from '../../models/progressionetudiant';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {User} from '../../models/user';
 
 @Component({
     selector: 'app-app-formation',
@@ -111,6 +112,17 @@ export class AppFormationComponent implements OnInit {
                 this.modalService.dismissAll();
             }
         );
+    }
+
+    getImage(user?: User): string {
+        if (user.image) {
+            return 'http://gestionscolarite.com/images/etudiants/' + user.image;
+        }
+        if (user.gendre === 'male') {
+            return 'http://gestionscolarite.com/assets/dist/img/avatar5.png';
+        } else {
+            return 'http://gestionscolarite.com/assets/dist/img/avatar2.png';
+        }
     }
 
 

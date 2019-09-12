@@ -72,4 +72,10 @@ export class AuthService {
             .set('authorization', 'Bearer ' + this.getToken());
         return this.httpClient.get<Notif[]>(this.url + 'lastnotifs', {headers});
     }
+
+    changePassword(password, new_password, new_password_confirmation) {
+        const headers = new HttpHeaders()
+            .set('authorization', 'Bearer ' + this.getToken());
+        return this.httpClient.put(this.url + 'auth/changepassword', {password, new_password, new_password_confirmation}, {headers});
+    }
 }

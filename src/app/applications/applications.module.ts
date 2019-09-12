@@ -23,6 +23,7 @@ import {VgControlsModule} from 'videogular2/compiled/src/controls/controls';
 import { SingleFormationComponent } from './single-formation/single-formation.component';
 import { AppProfileComponent } from './app-profile/app-profile.component';
 import { DetailFormationComponent } from './detail-formation/detail-formation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DetailFormationComponent } from './detail-formation/detail-formation.co
     AppFormationComponent,
     SingleFormationComponent,
     AppProfileComponent,
-    DetailFormationComponent
+    DetailFormationComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

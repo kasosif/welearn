@@ -35,7 +35,7 @@
           <h6 class="mb-4">{{formation.titre}}</h6>
           <ul class="list-unstyled">
             <li>
-              <label class="m-b-5 font-weight-500">{{formation.partieformations.length}} Parties </label>
+              <label class="m-b-5 font-weight-500">{{formation.partieformations.length}} Partie(s) </label>
             </li>
             <li>
               <label class="m-b-5 font-weight-500">Progression: {{calculProgress(formation)}} %</label>
@@ -92,20 +92,26 @@
     <div class="card mb-3" *ngFor="let formation of formations">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img  *ngIf="formation.image" [src]="'http://gestionscolarite.com/images/formations/' + formation.image" alt="" class="card-img">
+          <img style="height: 100%; object-fit: scale-down; padding: 30px;" *ngIf="formation.image" [src]="'http://gestionscolarite.com/images/formations/' + formation.image" alt="" class="card-img">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <div class="pull-right">
-              <button (click)="openModalSuppression(suppression, 'md', formation)" class="btn btn-danger"><i class="fa fa-trash"></i>Supprimer</button>
+              <button (click)="openModalSuppression(suppression, 'md', formation)" class="btn btn-danger"><i class="fa fa-trash" style="padding-right: 5px;"></i>Supprimer</button>
             </div>
             <small>titre: </small><br>
             <h5 class="card-title">{{formation.titre}}</h5>
             <small>description: </small><br>
             <p class="card-text">{{formation.description}}</p>
+
             <small>niveau: </small><br>
             <h5 class="card-title">{{formation.niveau.specialite.nom}} {{formation.niveau.nom}}</h5>
-            <p class="card-text"><small class="text-muted">ajouté {{ago(formation.created_at)}}</small></p>
+            <p class="card-text mb-0"><small class="text-muted " >ajouté {{ago(formation.created_at)}}</small></p>
+            <ul class="list-unstyled team-info  p-t-5 mb-3">
+              <li *ngFor="let etudiant of formation.niveau.classes[0].users">
+                <a [routerLink]="['/app/user/' + etudiant.cin]"><img [src]="getImage(etudiant)" alt="image etudiant"></a>
+              </li>
+            </ul>
             <a [routerLink]="['/app/formations/' + formation.slug]" class="btn btn-primary">Plus de Détails</a>
           </div>
         </div>

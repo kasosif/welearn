@@ -62,9 +62,11 @@
         <div class="header">
           <h2>
 						<span>
-							<button class="btn btn-warning mr-1" *ngIf="!singleloading && cases.length > 0">
+                          <a id="dwnldbtn" download="emploi.png">
+							<button (click)="genererPDF()" class="btn btn-warning mr-1" *ngIf="!singleloading && cases.length > 0">
 								<i class="icon-printer"></i> Imprimer
 							</button>
+                          </a>
 						</span>
             Emploi de la {{semaine}}
             (du {{getDayName(getDate(date_debut).getDay())}} {{getDate(date_debut).getDate()}} {{getMonthName(getDate(date_debut).getMonth())}} {{getDate(date_debut).getFullYear()}} à
@@ -72,7 +74,7 @@
           </h2>
           <h3 (click)="detailsopened = false; singleloading = true" style="cursor: pointer; color: green">Retour aux emplois</h3>
         </div>
-        <div class="body table-responsive">
+        <div class="body table-responsive" id="emploi">
           <table *ngIf="!singleloading && cases.length > 0" class="table table-bordered">
             <thead>
             <tr style="">

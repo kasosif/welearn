@@ -24,7 +24,7 @@
 				<div class="header">
 					<h2>
 						<span>
-							<button class="btn btn-warning mr-1" *ngIf="!loading && cases.length > 0">
+							<button (click)="genererPDF()" class="btn btn-warning mr-1" *ngIf="!loading && cases.length > 0">
 								<i class="icon-printer"></i> Imprimer
 							</button>
 						</span>

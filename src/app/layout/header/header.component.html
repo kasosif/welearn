@@ -45,10 +45,10 @@
                                 <a [routerLink]="[notif.data.lien]">
                                     <div class="media">
                                         <div class="media-left">
-                                            <i [ngClass]="notif.data.icone"></i>
+                                            <i [ngClass]="notif.data.icone" ></i>
                                         </div>
                                         <div class="media-body">
-                                            <p class="text">{{notif.data.texte}}
+                                            <p class="text" style="color: #fff;">{{notif.data.texte}}
                                                 <br>
                                                 {{ notif.data.date ? notif.data.date : notif.data.devoir }}
                                                 {{ notif.data.seance ? 'Seance: ' + notif.data.seance : '' }}
@@ -66,16 +66,10 @@
                             <i class="icon-user"></i>
                         </a>
                         <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li>
-                                <a [routerLink]="['/app/profile']">
-                                    Profil
-                                </a>
-                            </li>
-                            <li>
-                                <a style="cursor: pointer" (click)="onLogout()">
-                                    Deconnexion
-                                </a>
-                            </li>
+                            <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profil</a></li>
+                            <li><a [routerLink]="['/app/changepassword']"><i class="icon-lock"></i>Changer Mot de Passe</a></li>
+                            <li class="divider"></li>
+                            <li><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power"></i>Deconnexion</a></li>
                         </ul>
                     </li>
                 </ul>
