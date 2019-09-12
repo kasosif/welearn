@@ -86,7 +86,7 @@
 						</a>
 						<div class="dropdown">
 							<a [routerLink]="feed.user?.role === 'ROLE_PROFESSEUR' || feed.user?.role === 'ROLE_ETUDIANT' ? ['/app/user/' + feed.user?.cin]: '' " class="user-name">
-								<strong *ngIf="feed.user?.role == 'ROLE_PROFESSEUR' ">{{feed.user.gendre == 'male' ? 'Mr.' : 'Mme.'}}{{feed.user.nom}} {{feed.user.prenom}} <span *ngIf="getcin() === feed.user.cin" class="badge badge-primary">c'est vous!</span></strong>
+								<strong *ngIf="feed.user?.role == 'ROLE_PROFESSEUR' ">{{feed.user.gendre == 'male' ? 'Mr.' : 'Mme.'}}{{feed.user.nom}} {{feed.user.prenom}} <span *ngIf="getcin() == feed.user.cin" class="badge badge-primary">c'est vous!</span></strong>
 								<strong *ngIf="feed.user?.role != 'ROLE_PROFESSEUR' ">Administration</strong>
 							</a>
 							<span class="datetime">{{ago(feed.date)}}</span>

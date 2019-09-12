@@ -21,7 +21,7 @@
         <div class="body">
           <div class="user-account">
             <img *ngIf="feed.user?.role == 'ROLE_PROFESSEUR' " [src]="getImage(feed.user)" class="rounded-circle user-photo" alt="User Profile Picture">
-            <img *ngIf="feed.user?.role != 'ROLE_PROFESSEUR'" [src]="'http://gestionscolarite.com/assets/dist/img/avatar.png'" class="rounded-circle user-photo" alt="User Profile Picture" >
+            <img *ngIf="feed.user?.role != 'ROLE_PROFESSEUR'" src="assets/images/method-draw-image.svg" style="width: 50px;height: 50px;" class="rounded-circle user-photo" alt="User Profile Picture" >
             <div class="dropdown">
               <a href="javascript:void(0);" class="user-name">
                 <strong *ngIf="feed.user?.role == 'ROLE_PROFESSEUR' ">{{feed.user.gendre == 'male' ? 'Mr.' : 'Mme.'}}{{feed.user.nom}} {{feed.user.prenom}}</strong>
