@@ -3,7 +3,7 @@ import {Formation} from './formation';
 
 export class User {
   id: number;
-  cin: number;
+  cin: string;
   email: string;
   email_verified_at: string;
   image: string;

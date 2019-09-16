@@ -72,6 +72,7 @@
             </div>
           </div>
           <div formArrayName="parties" *ngFor="let parties of getformArray().controls; let i = index">
+            <hr>
             <div [formGroupName]="i">
               <div class="form-group">
                 <label [for]="'titrepartie' + (i + 1)">Titre Partie {{ (i + 1) }}</label>
@@ -79,12 +80,12 @@
               </div>
               <div class="form-group">
                 <label [for]="'videopartie' + (i + 1)">Video Partie {{(i + 1)}}</label>
-                <video controls class="img-thumbnail" [src]="findsrc((i+1))" width="100%"></video>
                 <app-file-upload [type]="'video'" (change)="readVideoUrl($event, (i+1))" formControlName="videopartie" [id]="'videopartie' + (i + 1)"></app-file-upload>
+                <video controls class="img-thumbnail" [src]="findsrc((i+1))" width="100%"></video>
               </div>
             </div>
           </div>
-          <button  [disabled]="!formationForm.valid || progress > 0" type="submit" class="btn btn-block btn-primary m-t-20">Ajouter Formation</button>
+          <button  [disabled]="!formationForm.valid || progress > 0" type="submit" class="btn btn-simple btn-primary m-t-20">Ajouter Formation</button>
           <br>
           <ngb-progressbar *ngIf="progress > 0" type="success" showValue="true" [striped]="true" [value]="progress" [animated]="true" height="20px"></ngb-progressbar>
         </form>

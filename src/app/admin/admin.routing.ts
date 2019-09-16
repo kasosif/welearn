@@ -19,6 +19,7 @@ import {DetailFormationComponent} from '../applications/detail-formation/detail-
 import {AjoutFormationComponent} from '../blogs/ajout-formation/ajout-formation.component';
 import {EmploisComponent} from '../pages/emplois/emplois.component';
 import {ChangePasswordComponent} from '../applications/change-password/change-password.component';
+import {EditFeedComponent} from '../blogs/edit-feed/edit-feed.component';
 
 const routes: Routes = [
     {
@@ -34,6 +35,9 @@ const routes: Routes = [
             },
             {
                 path: 'singlefeed/:slug', component: SingleFeedComponent, data: { title: ':: We Learn :: App :: Actualite ::' }
+            },
+            {
+                path: 'editfeed/:slug', component: EditFeedComponent, data: { title: ':: We Learn :: App :: Modifier Post ::' }
             },
             {
                 path: 'notes', component: NoteComponent, data: { title: ':: We Learn :: App :: Notes ::' }

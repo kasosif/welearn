@@ -1,4 +1,5 @@
 import {User} from './user';
+import {Classe} from './classe';
 
 export class Feed {
   titre: string;
@@ -8,4 +9,7 @@ export class Feed {
   contenu: string;
   type: string;
   user: User;
+  classes: Classe[];
+  professeurs: User[];
+  etudiants: User[];
 }

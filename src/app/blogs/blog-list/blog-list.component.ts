@@ -12,6 +12,7 @@ import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { pipe } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import {requiredFileType} from '../../../shared/requiredfiletype';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 export function uploadProgress<T>( cb: ( progress: number ) => void ) {
 	return tap(( event: HttpEvent<T> ) => {
@@ -41,6 +42,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 	progress = 0;
 	success = false;
 	loading = true;
+	selectedfeed: Feed;
 	feeds: Feed[] = [];
 	devoirs: Devoir[] = [];
 	slug: string;
@@ -50,6 +52,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 	public sidebarVisible = false;
 
 	constructor(private sidebarService: SidebarService,
+				private modalService: NgbModal,
 				private cdr: ChangeDetectorRef,
 				private formBuilder: FormBuilder,
 				private feedService: FeedService,
@@ -222,5 +225,23 @@ export class BlogListComponent implements OnInit, OnDestroy {
 	genslug() {
 		const feedTitle = this.feedForm.get('titre').value.toLowerCase();
 		this.slug = feedTitle.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').toLowerCase();
+	}
+
+	openModal(content, size, feed) {
+		this.selectedfeed = feed;
+		this.modalService.open(content, { size: size });
+	}
+
+	deleteFeed() {
+		this.feedService.deleteFeed(this.selectedfeed).subscribe(
+			() => {
+				const index: number = this.feeds.indexOf(this.selectedfeed);
+				if (index !== -1) {
+					this.feeds.splice(index, 1);
+				}
+				this.modalService.dismissAll();
+			}
+		);
+
 	}
 }

@@ -19,28 +19,32 @@
 		</div>
 		<div class="col-lg-8 col-md-12 left-box" *ngIf="!loading && feeds.length == 0">
 			<div class="card" *ngIf="getRole() == 'ROLE_PROFESSEUR' ">
-				<div class="header">
-					<div class="col-md-8">
-						<h2>Nouveau Post</h2>
+				<form [formGroup]="feedForm" (ngSubmit)="onFeedSubmit(feedForm.value)">
+					<div class="header">
+						<div class="col-md-8">
+							<h2>Nouveau Post</h2>
+						</div>
+						<div class="col-md-4">
+							<a [routerLink]="['/app/newfeed']">Post personnalisé</a>
+						</div>
 					</div>
-					<div class="col-md-4">
-						<a [routerLink]="['/app/newfeed']">Post personnalisé</a>
-					</div>
-				</div>
-				<div class="body">
-					<div class="new_post">
-						<div class="form-group">
-							<textarea rows="4" class="form-control no-resize"
+					<div class="body">
+						<div class="new_post">
+							<div class="form-group">
+								<input type="text" formControlName="titre" (keyup)="genslug()" class="form-control no-resize" placeholder="Titre">
+							</div>
+							<div class="form-group">
+							<textarea formControlName="contenu" rows="4" class="form-control no-resize"
 									  placeholder="Notez Bien que ce post sera public vous pouver ajouter un post personnalisé"></textarea>
-						</div>
-						<div class="post-toolbar-b">
-							<button class="btn btn-warning mr-1">
-								<i class="icon-camera"></i>
-							</button>
-							<button class="btn btn-primary">Publier</button>
+							</div>
+							<label for="image">Image</label>
+							<app-file-upload id="image" [type]="'image'" formControlName="image" [progress]="progress"></app-file-upload>
+							<div class="post-toolbar-b">
+								<button type="submit" class="btn btn-primary" [disabled]="!feedForm.valid">Publier</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<div class="alert alert-primary">
 				Vous n'avez Pas d'actualités...
@@ -60,7 +64,7 @@
 					<div class="body">
 						<div class="new_post">
 							<div class="form-group">
-							<input type="text" formControlName="titre" (keyup)="genslug()" class="form-control no-resize" placeholder="Titre">
+								<input type="text" formControlName="titre" (keyup)="genslug()" class="form-control no-resize" placeholder="Titre">
 							</div>
 							<div class="form-group">
 							<textarea formControlName="contenu" rows="4" class="form-control no-resize"
@@ -90,6 +94,10 @@
 								<strong *ngIf="feed.user?.role != 'ROLE_PROFESSEUR' ">Administration</strong>
 							</a>
 							<span class="datetime">{{ago(feed.date)}}</span>
+						</div>
+						<div class="pull-right" *ngIf="getcin() == feed.user.cin">
+							<a class="btn btn-primary m-r-10" [routerLink]="['/app/editfeed/' + feed.slug]"><i class="fa fa-pencil"></i></a>
+							<button class="btn btn-danger" (click)="openModal(deletemodal,'lg', feed)"><i class="fa fa-trash"></i></button>
 						</div>
 					</div>
 					<div class="img-post">
@@ -169,3 +177,16 @@
 		</div>
 	</div>
 </div>
+
+<ng-template #deletemodal let-modal>
+	<div class="modal-header">
+		<h4 class="title" >Suppression d'un Post</h4>
+	</div>
+	<div class="modal-body">
+		Etes vous sûr de vouloir supprimer le Post : <h2>{{selectedfeed.titre}}</h2>
+	</div>
+	<div class="modal-footer">
+		<button (click)="deleteFeed()" type="button" class="btn btn-danger">Oui</button>
+		<button type="button" class="btn btn-simple" data-dismiss="modal" (click)="modal.dismiss('Close click')">Fermer</button>
+	</div>
+</ng-template>

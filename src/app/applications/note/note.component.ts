@@ -99,7 +99,7 @@ export class NoteComponent implements OnInit {
     }
     let somme = 0;
     devoir.notes.forEach(el => somme += el.mark);
-    return somme / devoir.notes.length;
+    return (somme / devoir.notes.length).toFixed(2);
   }
 
   details(devoir) {

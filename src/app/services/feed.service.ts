@@ -69,4 +69,42 @@ export class FeedService {
         });
     }
 
+    deleteFeed(feed) {
+        const headers = new HttpHeaders()
+            .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+        return this.httpClient.delete(this.url + '/' + feed.slug, {headers});
+    }
+
+    editFeed(feed) {
+        const headers = new HttpHeaders()
+            .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+        const formData = new FormData();
+        formData.append('titre', feed.titre);
+        if (feed.image && feed.image !== 'null') {
+            formData.append('image', feed.image);
+        }
+        formData.append('contenu', feed.contenu);
+        formData.append('type', feed.type);
+        formData.append('slug', feed.slug);
+        switch (feed.type) {
+            case 'classes': {
+                feed.classes.forEach(el => formData.append('classes[]', el));
+                break;
+            }
+            case 'etudiants': {
+                feed.etudiants.forEach(el => formData.append('users[]', el));
+                break;
+            }
+            case 'professeurs': {
+                feed.professeurs.forEach(el => formData.append('users[]', el));
+                break;
+            }
+        }
+        return this.httpClient.post(this.url + '/' + feed.id, formData, {
+            headers,
+            reportProgress: true,
+            observe: 'events'
+        });
+    }
+
 }
