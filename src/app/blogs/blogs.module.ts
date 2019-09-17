@@ -15,11 +15,13 @@ import { PartieFormationAjoutComponent } from './partie-formation-ajout/partie-f
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {UiProgressbarsComponent} from './ui-progressbars/ui-progressbars.component';
 import { EditFeedComponent } from './edit-feed/edit-feed.component';
+import { EditFormationComponent } from './edit-formation/edit-formation.component';
+import { EditPartieComponent } from './edit-formation/edit-partie/edit-partie.component';
 
 
 @NgModule({
 	declarations: [BlogPostComponent, BlogListComponent, BlogDetailsComponent,
-		FileUploadComponent, ProgressComponent, AjoutFormationComponent, PartieFormationAjoutComponent, UiProgressbarsComponent, EditFeedComponent],
+		FileUploadComponent, ProgressComponent, AjoutFormationComponent, PartieFormationAjoutComponent, UiProgressbarsComponent, EditFeedComponent, EditFormationComponent, EditPartieComponent],
 	imports: [
 		CommonModule,
 		RouterModule,

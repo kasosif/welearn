@@ -65,11 +65,11 @@
                         <a style="cursor: pointer" class="dropdown-toggle icon-menu" ngbDropdownToggle>
                             <i class="icon-user"></i>
                         </a>
-                        <ul class="dropdown-menu" ngbDropdownMenu>
-                            <li><a [routerLink]="['/app/profile']"><i class="icon-user"></i>Mon Profil</a></li>
-                            <li><a [routerLink]="['/app/changepassword']"><i class="icon-lock"></i>Changer Mot de Passe</a></li>
+                        <ul class="dropdown-menu" style="width: 230px" ngbDropdownMenu>
+                            <li style="margin-bottom: 10px;"><a [routerLink]="['/app/profile']"><i class="icon-user" style="margin-right: 9px;"></i>Mon Profil</a></li>
+                            <li style="margin-bottom: 10px;"><a [routerLink]="['/app/changepassword']"><i class="icon-lock" style="margin-right: 9px;"></i>Changer Mot de Passe</a></li>
                             <li class="divider"></li>
-                            <li><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power"></i>Deconnexion</a></li>
+                            <li style="margin-bottom: 10px;"><a style="cursor: pointer" (click)="onLogout()"><i class="icon-power" style="margin-right: 9px;"></i>Deconnexion</a></li>
                         </ul>
                     </li>
                 </ul>

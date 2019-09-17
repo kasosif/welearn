@@ -1,7 +1,7 @@
 <app-page-loader *ngIf="loading"></app-page-loader>
 <div id="left-sidebar" class="sidebar" *ngIf="sidebarVisible" style="overflow-y:scroll;">
     <div class="sidebar-scroll">
-        <div class="user-account">
+        <div class="user-account" style="display: flex;">
             <a [routerLink]="['/app/profile']"><img style="width: 60px;height: 60px;object-fit: cover;" [src]="getImage(me)" class="rounded-circle user-photo" alt="User Profile Picture"></a>
             <div class="dropdown" ngbDropdown>
                 <span>Bienvenue, <strong>{{getRole(me)}}</strong></span>

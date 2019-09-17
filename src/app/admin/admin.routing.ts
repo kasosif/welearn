@@ -20,6 +20,7 @@ import {AjoutFormationComponent} from '../blogs/ajout-formation/ajout-formation.
 import {EmploisComponent} from '../pages/emplois/emplois.component';
 import {ChangePasswordComponent} from '../applications/change-password/change-password.component';
 import {EditFeedComponent} from '../blogs/edit-feed/edit-feed.component';
+import {EditFormationComponent} from '../blogs/edit-formation/edit-formation.component';
 
 const routes: Routes = [
     {
@@ -50,6 +51,10 @@ const routes: Routes = [
             },
             {
                 path: 'single-formation/:slug', component: SingleFormationComponent, data: { title: ':: We Learn :: App :: Formation ::' }
+            },
+            {
+                path: 'editformation/:slug', component: EditFormationComponent,
+                data: { title: ':: We Learn :: App :: Modifier Formation ::' }
             },
             {
                 path: 'addformation', component: AjoutFormationComponent, data: { title: ':: We Learn :: App :: Ajout Formation ::' }

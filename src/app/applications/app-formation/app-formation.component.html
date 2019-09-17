@@ -97,7 +97,7 @@
         <div class="col-md-8">
           <div class="card-body">
             <div class="pull-right">
-              <a href="#" class="btn btn-primary m-r-10"><i class="fa fa-pencil" style="padding-right: 5px;"></i>Modifier</a>
+              <a [routerLink]="['/app/editformation/' + formation.slug]" class="btn btn-primary m-r-10"><i class="fa fa-pencil" style="padding-right: 5px;"></i>Modifier</a>
               <button (click)="openModalSuppression(suppression, 'md', formation)" class="btn btn-danger"><i class="fa fa-trash" style="padding-right: 5px;"></i>Supprimer</button>
             </div>
             <small>titre: </small><br>

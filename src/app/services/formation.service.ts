@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import { Globals } from '../Globals';
+import {Partieformation} from '../models/partieformation';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +43,27 @@ export class FormationService {
       observe: 'events'
     });
   }
+  edit(formation) {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    const formData = new FormData();
+    formData.append('titre', formation.titre);
+    formData.append('slug', formation.slug);
+    if (formation.image && formation.image !== 'null') {
+      formData.append('image', formation.image);
+    }
+    formData.append('description', formation.description);
+    formData.append('niveau_id', formation.niveau_id);
+    formation.parties.forEach((el, index) => {
+      formData.append('parties[' + (index + 1) + '][titre]', el.titrepartie);
+      formData.append('parties[' + (index + 1) + '][video]', el.videopartie);
+    });
+    return this.httpClient.post(this.url + '/edit/' + formation.id, formData, {
+      headers,
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
 
   progressEtudiant(partieformation, progress, duration) {
     const headers = new HttpHeaders()
@@ -53,5 +75,10 @@ export class FormationService {
     const headers = new HttpHeaders()
         .set('authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.httpClient.delete(this.url + '/' + slug, {headers});
+  }
+  deletePartie(partie: Partieformation) {
+    const headers = new HttpHeaders()
+        .set('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.httpClient.delete(this.url + '/deletepartie/' + partie.uuid, {headers});
   }
 }
